@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BitcoinZ Explorer</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-theme="soft-dark">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">B<span>Z</span></div>
+      <div>
+        <h1>BitcoinZ Explorer</h1>
+        <p>Core minimal, modulaire, propre</p>
+      </div>
+    </div>
+
+    <form id="search-form" class="searchbar">
+      <input id="search-input" type="text" placeholder="Search Address / TX / Block" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+  </header>
+
+  <main class="layout">
+    <section class="hero-card" id="hero-stats">
+      <h2>Network Heartbeat</h2>
+      <div class="hero-grid" id="stats-grid"></div>
+    </section>
+
+    <section>
+      <h2>Modules</h2>
+      <div class="widget-grid" id="widget-grid"></div>
+    </section>
+  </main>
+
+  <script type="module" src="/static/app.js"></script>
+</body>
+</html>
