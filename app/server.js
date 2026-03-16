@@ -106,6 +106,50 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
+app.get("/api/block/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const hash = /^[0-9]+$/.test(id)
+      ? await rpc("getblockhash", [parseInt(id, 10)])
+      : id;
+
+    const block = await rpc("getblock", [hash]);
+    res.json(block);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.get("/api/tx/:id", async (req, res) => {
+  try {
+    const tx = await rpc("getrawtransaction", [req.params.id, 1]);
+    res.json(tx);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.get("/api/address/:id", async (req, res) => {
+  try {
+    const addr = req.params.id;
+
+    const [balance, utxos, txids] = await Promise.all([
+      rpc("getaddressbalance", [{ addresses: [addr] }]),
+      rpc("getaddressutxos", [{ addresses: [addr] }]),
+      rpc("getaddresstxids", [{ addresses: [addr] }])
+    ]);
+
+    res.json({
+      address: addr,
+      balance,
+      utxos,
+      txids
+    });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 app.get("/block/:id", async (req, res) => {
   const id = req.params.id;
   res.sendFile(path.join("/web", "index.html"));
