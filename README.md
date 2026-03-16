@@ -186,4 +186,4 @@ BitcoinZ
 
 Official project:
 
-https://getbitcoinz.com
+https://getbtcz.com
